@@ -1,0 +1,14 @@
+{
+  "name": "negura",
+  "version": "1.0.0",
+  "description": "空き家再生ホテル・長期滞在施設 negura のWebサイト",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
