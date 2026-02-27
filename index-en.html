@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
         (function () {
+            var host = window.location.hostname || '';
+            if (host.indexOf('vercel.app') === -1 && host.indexOf('github.io') === -1) return;
             var path = window.location.pathname;
             if (path && !path.endsWith('/')) {
                 var segs = path.split('/').filter(Boolean);
@@ -70,29 +72,29 @@
         </div>
     </header>
 
-    <main class="pt-14 md:pt-20">
+    <main class="main-with-footer pt-14 md:pt-20">
         
         <!-- Hero -->
-        <section class="relative w-full h-screen">
+        <section class="hero-first-view relative w-full h-screen overflow-hidden">
             <img src="assets/images/rectangle_large_type_2_1aa3de3079240d9b2a11c064285858c3.jpeg" 
                  alt="negura" 
-                 class="absolute inset-0 w-full h-full object-cover">
+                 class="hero-first-img absolute inset-0 w-full h-full object-contain md:object-cover">
             <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <div class="absolute inset-0 flex items-center justify-center" style="background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);"></div>
-                <div class="hero-brand-fade-in relative flex items-center justify-center gap-4 md:gap-6 lg:gap-8">
+                <div class="hero-brand-fade-in relative flex items-center justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 max-w-full px-2">
                     <div class="hero-brand-logo-wrap relative inline-block flex-shrink-0">
-                        <span class="relative inline-block h-64 sm:h-80 md:h-96 lg:h-[448px] w-auto flex-shrink-0 transform scale-90 -translate-x-3">
+                        <span class="relative inline-block h-48 sm:h-64 md:h-96 lg:h-[448px] w-auto flex-shrink-0 transform scale-75 sm:scale-90 -translate-x-1 sm:-translate-x-3">
                             <img src="assets/images/9933c4b79855aeb79f7bc69bd0d9b943.png" alt="negura" class="h-full w-auto object-contain opacity-0 pointer-events-none" aria-hidden="true">
                             <span class="absolute inset-0 bg-white" style="mask-image: url('assets/images/9933c4b79855aeb79f7bc69bd0d9b943.png'); -webkit-mask-image: url('assets/images/9933c4b79855aeb79f7bc69bd0d9b943.png'); mask-size: contain; -webkit-mask-size: contain; mask-position: center; -webkit-mask-position: center; mask-repeat: no-repeat; -webkit-mask-repeat: no-repeat;"></span>
                         </span>
                     </div>
-                    <img src="assets/images/1a4f533632b886ddcf1f5767c8390000 (1) (1).png" alt="NEGURA" class="hero-brand-logo-text h-[54px] sm:h-[72px] md:h-[90px] lg:h-[108px] w-auto object-contain">
+                    <img src="assets/images/1a4f533632b886ddcf1f5767c8390000 (1) (1).png" alt="NEGURA" class="hero-brand-logo-text h-10 sm:h-[54px] md:h-[72px] lg:h-[90px] xl:h-[108px] w-auto object-contain max-w-[45vw] sm:max-w-none">
                 </div>
             </div>
         </section>
         
-        <!-- Lead copy -->
-        <section class="bg-[#FDF9F1] px-6 sm:px-8 md:px-10 lg:px-12 pt-16 md:pt-24 lg:pt-32 pb-2 md:pb-3 lg:pb-4">
+        <!-- Lead copy (right below hero on mobile) -->
+        <section class="hero-lead-section bg-[#FDF9F1] px-6 sm:px-8 md:px-10 lg:px-12 pt-6 md:pt-24 lg:pt-32 pb-2 md:pb-3 lg:pb-4">
             <div class="max-w-2xl mx-auto reveal-on-scroll">
                 <p class="text-[#322B29] text-3xl md:text-5xl font-extralight leading-[1.8] md:leading-[2] mb-8 md:mb-10">
                     A quiet hideaway<br>with a bird host.
@@ -109,7 +111,7 @@
         </section>
 
         <!-- About negura -->
-        <section id="about" class="pt-3 md:pt-4 lg:pt-5 pb-8 md:pb-12 lg:pb-16 bg-[#FDF9F1]">
+        <section id="about" class="pt-12 md:pt-16 lg:pt-20 pb-8 md:pb-12 lg:pb-16 bg-[#FDF9F1]">
             <div class="max-w-4xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12 relative">
                 <div class="about-nest peek-hole absolute top-0 right-0">
                     <img src="assets/images/Gemini_Generated_Image_ehdah8ehdah8ehda (1).png" alt="" aria-hidden="true" class="about-nest-img">
@@ -142,7 +144,7 @@
                                 <!-- Center (current) -->
                                 <div class="col-span-6 md:col-span-6">
                                     <div class="aspect-[4/3] rounded-xl overflow-hidden bg-[#FDF9F1] border border-[#322B29]/20 flex items-center justify-center">
-                                        <img id="gallery-main-img" src="" alt="" class="h-full w-full object-contain">
+                                        <img id="gallery-main-img" src="assets/images/rectangle_large_type_2_1aa3de3079240d9b2a11c064285858c3.jpeg" alt="negura gallery 0" class="h-full w-full object-contain">
                                     </div>
                                 </div>
                                 <!-- Right (next) -->
@@ -296,11 +298,12 @@
                     </div>
                 </div>
                 
-                <!-- SPOT (top row: 3 cards) -->
+                <!-- SPOT (1 row, 3 cards, fixed width, horizontal scroll) -->
                 <p class="text-[1.35rem] tracking-widest text-[#322B29]/60 uppercase mb-3">SPOT</p>
-                <div class="grid grid-cols-3 gap-4 md:gap-6 lg:gap-8 mb-6">
+                <div class="spot-grid-wrap overflow-x-auto overflow-y-hidden -mx-6 px-6 md:mx-0 md:px-0">
+                    <div class="spot-grid flex flex-nowrap gap-4 md:gap-6 lg:gap-8 mb-6">
                     <!-- SPOT 1 -->
-                    <div class="luxury-card bg-[#FDF9F1] overflow-hidden reveal-on-scroll">
+                    <div class="luxury-card spot-card bg-[#FDF9F1] overflow-hidden reveal-on-scroll flex-shrink-0">
                         <div class="aspect-[4/3] overflow-hidden bg-[#FDF9F1] relative">
                             <a href="https://www.google.com/maps/search/?api=1&amp;query=三原城跡" target="_blank" rel="noopener noreferrer" class="block w-full h-full group relative">
                                 <img src="assets/images/3844718_m.jpg" alt="Mihara Castle Ruins" class="w-full h-full object-cover" loading="lazy">
@@ -317,7 +320,7 @@
                         </div>
                     </div>
                     <!-- SPOT 2 -->
-                    <div class="luxury-card bg-[#FDF9F1] overflow-hidden reveal-on-scroll">
+                    <div class="luxury-card spot-card bg-[#FDF9F1] overflow-hidden reveal-on-scroll min-w-[140px] md:min-w-0">
                         <div class="aspect-[4/3] overflow-hidden bg-[#FDF9F1] relative">
                             <a href="https://www.google.com/maps/search/?api=1&amp;query=大島神社%20三原" target="_blank" rel="noopener noreferrer" class="block w-full h-full group relative">
                                 <img src="assets/images/29102806_m.jpg" alt="Oshima Shrine" class="w-full h-full object-cover" loading="lazy">
@@ -334,7 +337,7 @@
                         </div>
                     </div>
                     <!-- SPOT 3 -->
-                    <div class="luxury-card bg-[#FDF9F1] overflow-hidden reveal-on-scroll">
+                    <div class="luxury-card spot-card bg-[#FDF9F1] overflow-hidden reveal-on-scroll flex-shrink-0">
                         <div class="aspect-[4/3] overflow-hidden bg-[#FDF9F1] relative">
                             <a href="https://www.google.com/maps/search/?api=1&amp;query=本郷町%20三原" target="_blank" rel="noopener noreferrer" class="block w-full h-full group relative">
                                 <img src="assets/images/3dfd2ecb63796c5a1c436207ce682108.png" alt="Streets of Hongo" class="w-full h-full object-cover" loading="lazy">
@@ -350,9 +353,10 @@
                             </p>
                         </div>
                     </div>
+                    </div>
                 </div>
 
-                <!-- FOOD (bottom row: 3 cards) -->
+                <!-- FOOD (1 row, 3 cards, fixed width, horizontal scroll) -->
                 <div class="flex items-center justify-between mb-3">
                     <p class="text-[1.35rem] tracking-widest text-[#322B29]/60 uppercase">FOOD</p>
                     <div class="whisper-fade-in flex items-center gap-2 md:gap-3 text-left">
@@ -360,9 +364,10 @@
                         <p class="text-xs md:text-sm text-[#322B29]/60 italic font-light leading-relaxed">Tap a photo to open the map.</p>
                     </div>
                 </div>
-                <div class="grid grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+                <div class="food-grid-wrap overflow-x-auto overflow-y-hidden -mx-6 px-6 md:mx-0 md:px-0">
+                    <div class="food-grid flex flex-nowrap gap-4 md:gap-6 lg:gap-8">
                     <!-- FOOD 1 -->
-                    <div class="luxury-card bg-[#FDF9F1] overflow-hidden reveal-on-scroll">
+                    <div class="luxury-card food-card bg-[#FDF9F1] overflow-hidden reveal-on-scroll flex-shrink-0">
                         <div class="aspect-[4/3] overflow-hidden bg-[#FDF9F1] relative">
                             <a href="https://www.google.com/maps/search/?api=1&amp;query=まちのだいどころ%20おかって%20三原" target="_blank" rel="noopener noreferrer" class="block w-full h-full group relative">
                                 <img src="assets/images/29433f1b64bdb61bf9c14899defe43ea.jpg" alt="Machino Daidokoro Okatte" class="w-full h-full object-cover" loading="lazy">
@@ -379,7 +384,7 @@
                         </div>
                     </div>
                     <!-- FOOD 2 -->
-                    <div class="luxury-card bg-[#FDF9F1] overflow-hidden reveal-on-scroll">
+                    <div class="luxury-card food-card bg-[#FDF9F1] overflow-hidden reveal-on-scroll flex-shrink-0">
                         <div class="aspect-[4/3] overflow-hidden bg-[#FDF9F1] relative">
                             <a href="https://www.google.com/maps/search/?api=1&amp;query=お好み焼き%20てっちゃん%20三原" target="_blank" rel="noopener noreferrer" class="block w-full h-full group relative">
                                 <img src="assets/images/4_1.jpg" alt="Okonomiyaki Tetchan" class="w-full h-full object-cover" loading="lazy">
@@ -396,7 +401,7 @@
                         </div>
                     </div>
                     <!-- FOOD 3 -->
-                    <div class="luxury-card bg-[#FDF9F1] overflow-hidden reveal-on-scroll">
+                    <div class="luxury-card food-card bg-[#FDF9F1] overflow-hidden reveal-on-scroll flex-shrink-0">
                         <div class="aspect-[4/3] overflow-hidden bg-[#FDF9F1] relative">
                             <a href="https://www.google.com/maps/search/?api=1&amp;query=八天堂カフェ%20三原" target="_blank" rel="noopener noreferrer" class="block w-full h-full group relative">
                                 <img src="assets/images/IMG_3515.jpeg" alt="Hattendo Cafe" class="w-full h-full object-cover" loading="lazy">
@@ -411,6 +416,7 @@
                                 From the port town of Mihara to the world. Enjoy a gentle Setouchi moment with sweet buns filled with local love.
                             </p>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -513,11 +519,9 @@
         (function () {
             var images = [
                 { src: 'assets/images/rectangle_large_type_2_1aa3de3079240d9b2a11c064285858c3.jpeg', alt: 'negura gallery 0' },
-                { src: 'assets/images/line_album_negura_260228_1.jpg', alt: 'negura gallery 1' },
-                { src: 'assets/images/line_album_negura_260228_3.jpg', alt: 'negura gallery 2' },
-                { src: 'assets/images/line_album_negura_260228_4.jpg', alt: 'negura gallery 3' },
-                { src: 'assets/images/line_album_negura_260228_5.jpg', alt: 'negura gallery 4' },
-                { src: 'assets/images/59526855bd99308567e7a22d6841de87.png', alt: 'negura gallery 5' }
+                { src: 'assets/images/1769775909-gsWS1rIGxmozHjNtKBuUeFi9.webp', alt: 'negura gallery 1' },
+                { src: 'assets/images/1769514092-72QcgXwAhZlieCjsW5mbENDr.webp', alt: 'negura gallery 2' },
+                { src: 'assets/images/1769775526-kMBQm8bgp9iITlDh2UOF5YRr.webp', alt: 'negura gallery 3' }
             ];
             var current = 0;
 

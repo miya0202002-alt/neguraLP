@@ -18,6 +18,7 @@
 /* Base styles - フッターを最下部に配置・下の余白なし */
 html {
     min-height: 100%;
+    min-height: 100vh;
     margin: 0;
     scroll-behavior: smooth;
 }
@@ -37,6 +38,80 @@ body {
 
 body > main {
     flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* フッターを常に最下部に */
+body > main.main-with-footer {
+    min-height: calc(100vh - 3.5rem);
+}
+@media (min-width: 768px) {
+    body > main.main-with-footer {
+        min-height: calc(100vh - 5rem);
+    }
+}
+body > main.main-with-footer > footer {
+    margin-top: auto;
+    margin-bottom: 0;
+    flex-shrink: 0;
+}
+
+/* スマホ：ヒーロー上下の空白をなくし、画像のすぐ下にリード文 */
+.hero-first-view {
+    overflow: hidden;
+}
+@media (max-width: 767px) {
+    .hero-first-view {
+        height: 0;
+        padding-bottom: 75%;
+        min-height: 0;
+    }
+    .hero-first-view .hero-first-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+    .hero-lead-section {
+        padding-top: 1.5rem;
+    }
+}
+@media (min-width: 768px) {
+    .hero-first-view .hero-first-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+    }
+}
+
+/* SPOT・FOOD：1段・固定幅カード・横スクロール・改行位置統一（縦スクロールバー非表示） */
+.spot-grid-wrap,
+.food-grid-wrap {
+    -webkit-overflow-scrolling: touch;
+    overflow-y: hidden;
+}
+.spot-card,
+.food-card {
+    width: 280px;
+    min-width: 280px;
+}
+.spot-card .p-4,
+.spot-card [class*="p-4"],
+.spot-card [class*="p-6"],
+.spot-card [class*="p-8"],
+.food-card .p-4,
+.food-card [class*="p-4"],
+.food-card [class*="p-6"],
+.food-card [class*="p-8"] {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Header Logo Styles */
@@ -802,7 +877,15 @@ img {
 .peek-hole:hover .peek-bird,
 .peek-hole.is-peeking .peek-bird { bottom: 4px; }
 
-/* about セクション専用の巣＋ひょっこり位置調整 */
+/* about セクション：画像のはみ出し・見切れ防止 */
+#about {
+    overflow-x: hidden;
+}
+/* ねぐらについて：巣・鳥を上の文字にも下の文字にもかからない位置に配置 */
+#about .max-w-4xl > h2:first-of-type {
+    margin-top: 5rem;
+}
+/* about セクション専用の巣＋ひょっこり位置調整（パソコン表示サイズで常に固定） */
 .about-nest.peek-hole {
     width: 120px;
     height: 120px;
@@ -810,12 +893,20 @@ img {
     background: transparent;
     box-shadow: none;
     cursor: pointer;
-    position: relative;
+    position: absolute;
     pointer-events: auto;
-    right: -560px;
+    right: 0;
+    top: -40px;
 }
-@media (min-width: 768px) {
-    .about-nest.peek-hole { right: -700px; }
+.about-nest .peek-bird {
+    width: 66px;
+    height: 66px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 27px;
+    opacity: 0;
+    pointer-events: none;
+    transition: bottom 0.48s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.1s ease-out;
 }
 .about-nest.peek-hole::after {
     content: "";
@@ -831,17 +922,17 @@ img {
     display: block;
     pointer-events: none;
 }
-.about-nest .peek-bird {
-    width: 66px;
-    height: 66px;
-    bottom: 6px;
-    opacity: 0;
-    pointer-events: none;
-    transition: bottom 0.48s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.1s ease-out;
-}
 .about-nest:hover .peek-bird,
 .about-nest.is-peeking .peek-bird {
-    bottom: 28px;
     opacity: 1;
     transition: bottom 0.48s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out;
+}
+/* フェードイン後の鳥を巣画像の中央に配置（120pxの中央 = 60px、鳥66pxの半分33px → bottom: 27px） */
+@media (max-width: 767px) {
+    .about-nest:hover .peek-bird,
+    .about-nest.is-peeking .peek-bird { bottom: 27px; }
+}
+@media (min-width: 768px) {
+    .about-nest:hover .peek-bird,
+    .about-nest.is-peeking .peek-bird { bottom: 27px; }
 }
