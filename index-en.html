@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
         (function () {
-            if (window.location.hostname.indexOf('github.io') === -1) return;
             var path = window.location.pathname;
-            var segs = path.split('/').filter(Boolean);
-            var basePath = segs.length > 0 ? '/' + segs[0] + '/' : '/';
+            if (path && !path.endsWith('/')) {
+                var segs = path.split('/').filter(Boolean);
+                if (segs.length === 1) {
+                    window.location.replace(path + '/');
+                    return;
+                }
+            }
+            var dir = path.endsWith('/') ? path : (path.slice(0, path.lastIndexOf('/') + 1) || '/');
             var base = document.createElement('base');
-            base.href = window.location.origin + basePath;
+            base.href = window.location.origin + dir;
             document.head.insertBefore(base, document.head.firstChild);
         })();
     </script>
