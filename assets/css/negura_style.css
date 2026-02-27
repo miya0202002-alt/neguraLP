@@ -9,8 +9,24 @@
     font-weight: 300;
 }
 
-/* Base styles */
+/* ヒーロー「NEGURA」ロゴタイプ - 高級ホテル風セリフ */
+.hero-brand-name {
+    font-family: "Cormorant Garamond", "Times New Roman", Times, serif;
+    font-weight: 600;
+}
+
+/* Base styles - フッターを最下部に配置・下の余白なし */
+html {
+    min-height: 100%;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
 body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     line-height: 1.6;
     letter-spacing: 0.01em;
     background-color: #FDF9F1;
@@ -19,10 +35,36 @@ body {
     font-size: 16px;
 }
 
+body > main {
+    flex: 1 0 auto;
+}
+
 /* Header Logo Styles */
 header {
+    position: relative;
     backdrop-filter: blur(10px);
     background-color: rgba(253, 249, 241, 0.95);
+}
+.header-logo-link {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+.header-logo-img {
+    height: 45px;
+    min-height: 45px;
+    min-width: 146px;
+    transform: scale(1.08);
+    transform-origin: left center;
+}
+@media (min-width: 768px) {
+    .header-logo-img {
+        height: 52px;
+        min-height: 52px;
+        min-width: 178px;
+    }
 }
 
 header .logo img {
@@ -345,6 +387,100 @@ footer a:hover .footer-logo {
     transform: translateY(0);
 }
 
+/* 鳥の支配人の囁き - フェードイン */
+.whisper-fade-in {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.whisper-fade-in.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 高級ホテル風：スクロールでふわっと表示 */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 観光カード：控えめなホバー（浮き上がり＋影） */
+.luxury-card {
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.5s ease;
+}
+
+.luxury-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(50, 43, 41, 0.08);
+}
+
+/* タイムライン画像：ホバーでわずかにズーム */
+.luxury-img-zoom img {
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.luxury-img-zoom:hover img {
+    transform: scale(1.04);
+}
+
+/* ヒーロー：ロゴ＋NEGURA のページ表示時フェードイン */
+.hero-brand-fade-in {
+    position: relative;
+    opacity: 0;
+    animation: hero-brand-fade-in 2s ease-out forwards;
+}
+
+/* ヒーロー：ロゴ直下に中心があるハイライト（光）、境目はぼかし */
+.hero-brand-logo-wrap {
+    position: relative;
+}
+
+.hero-brand-highlight {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(160%, 1000px);
+    height: min(140%, 560px);
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+        ellipse 65% 75% at 50% 50%,
+        rgba(255, 253, 251, 0.38) 0%,
+        rgba(255, 253, 251, 0.2) 35%,
+        rgba(255, 253, 251, 0.08) 55%,
+        transparent 72%
+    );
+    filter: blur(16px);
+    -webkit-filter: blur(16px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-brand-logo-wrap > span {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes hero-brand-fade-in {
+    to {
+        opacity: 1;
+    }
+}
+
+/* ヒーロー：NEGURA画像を真っ白に */
+.hero-brand-logo-text {
+    filter: brightness(0) invert(1);
+    -webkit-filter: brightness(0) invert(1);
+}
+
 /* Service Card */
 .service-card {
     transition: transform 0.3s ease;
@@ -354,10 +490,7 @@ footer a:hover .footer-logo {
     transform: translateY(-8px);
 }
 
-/* Smooth Scroll */
-html {
-    scroll-behavior: smooth;
-}
+/* Smooth Scroll（html の scroll-behavior は Base styles で指定） */
 
 /* Container adjustments */
 .max-w-7xl {
@@ -371,9 +504,74 @@ img {
     display: block;
 }
 
+/* Gallery main image animation */
+@keyframes gallery-main-next {
+    0% {
+        transform: translateX(80px) scale(0.9);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes gallery-main-prev {
+    0% {
+        transform: translateX(-80px) scale(0.9);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.gallery-main-anim-next {
+    animation: gallery-main-next 0.8s ease forwards;
+}
+
+.gallery-main-anim-prev {
+    animation: gallery-main-prev 0.8s ease forwards;
+}
+
+/* Gallery track animation (3枚まとめてスワイプ感を出す) */
+@keyframes gallery-track-next {
+    0% {
+        transform: translateX(80px) scale(0.97);
+    }
+    100% {
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes gallery-track-prev {
+    0% {
+        transform: translateX(-80px) scale(0.97);
+    }
+    100% {
+        transform: translateX(0) scale(1);
+    }
+}
+
+.gallery-track-anim-next {
+    animation: gallery-track-next 0.8s ease forwards;
+}
+
+.gallery-track-anim-prev {
+    animation: gallery-track-prev 0.8s ease forwards;
+}
+
 /* Footer styling */
 footer a {
     transition: color 0.3s ease;
+}
+
+/* Airbnb埋め込みまわり：ページ背景と揃える */
+#airbnb-embed-container,
+#airbnb-embed-container .airbnb-embed-frame,
+#airbnb-embed-container iframe {
+    background-color: #FCFBF7 !important;
 }
 
 /* Floor item spacing */
@@ -388,7 +586,7 @@ footer a {
 
 /* Map (Access) section - 枠付きレイアウト */
 .access-section {
-    background-color: #FDF9F1;
+    background-color: #FCFBF7;
     padding-top: 40px;
     padding-bottom: 40px;
 }
@@ -417,9 +615,60 @@ footer a {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
-/* Mobile Bottom Navigation */
+/* ねぐらができるまで：ら・がの線を葉っぱに */
+.h2-leaf-char {
+    position: relative;
+    display: inline-block;
+}
+
+.h2-leaf-char::before {
+    content: "";
+    position: absolute;
+    width: 0.55em;
+    height: 0.9em;
+    background-color: #92905D;
+    border-radius: 50% 50% 50% 50%;
+    pointer-events: none;
+}
+
+.h2-leaf-char::after {
+    content: "";
+    position: absolute;
+    width: 0.05em;
+    height: 0.7em;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 999px;
+    pointer-events: none;
+}
+
+.h2-leaf-char-ra::before {
+    top: -0.45em;
+    left: 0.05em;
+    transform: rotate(-25deg);
+}
+
+.h2-leaf-char-ga::before {
+    top: -0.45em;
+    right: -0.05em;
+    left: auto;
+    transform: rotate(45deg);
+}
+
+.h2-leaf-char-ra::after {
+    top: -0.3em;
+    left: 0.23em;
+    transform: rotate(-25deg);
+}
+
+.h2-leaf-char-ga::after {
+    top: -0.3em;
+    right: 0.15em;
+    transform: rotate(45deg);
+}
+
+/* Mobile Bottom Navigation（コンテンツ用の余白は main にのみ） */
 @media (max-width: 767px) {
-    body {
+    body > main {
         padding-bottom: 64px; /* モバイルナビゲーションの高さ分 */
     }
 }
@@ -448,9 +697,13 @@ footer a {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-/* Focus styles */
+/* Focus styles - キーボード操作時のみアウトライン表示（マウス時は非表示） */
 a:focus,
 button:focus {
+    outline: none;
+}
+a:focus-visible,
+button:focus-visible {
     outline: 2px solid rgba(0, 0, 0, 0.3);
     outline-offset: 2px;
 }
@@ -481,4 +734,114 @@ html, body {
 img {
     max-width: 100%;
     height: auto;
+}
+
+/* ================================================================
+   ブランドギミック追加
+   1. 葉・枝アニメーション  2. ひょっこり鳥  3. 線画プレースホルダー
+================================================================ */
+
+/* 1. 葉の揺れ（既存 h2-leaf-char::before の transform を上書き） */
+@keyframes leaf-sway-ra {
+    0%, 100% { transform: rotate(-25deg); }
+    50%       { transform: rotate(-15deg) scale(1.06); }
+}
+@keyframes leaf-sway-ga {
+    0%, 100% { transform: rotate(45deg); }
+    50%       { transform: rotate(35deg) scale(1.06); }
+}
+.h2-leaf-char-ra::before { animation: leaf-sway-ra 4s ease-in-out infinite; }
+.h2-leaf-char-ga::before { animation: leaf-sway-ga 5s ease-in-out infinite; }
+
+/* インライン枝SVGの揺れ */
+@keyframes branch-sway {
+    0%, 100% { transform: rotate(0deg); }
+    50%       { transform: rotate(2.5deg); }
+}
+.h2-branch-svg {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    opacity: 0.28;
+    animation: branch-sway 6s ease-in-out infinite;
+    transform-origin: 0% 80%;
+}
+
+/* 2. ひょっこり鳥（隠れ穴ギミック） */
+.section-bird-peek {
+    position: relative;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    margin-top: -28px;
+    z-index: 20;
+    pointer-events: none;
+}
+.peek-hole {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #2C2421;
+    box-shadow: inset 0 5px 14px rgba(0,0,0,0.55), 0 2px 8px rgba(50,43,41,0.14);
+    cursor: pointer;
+    pointer-events: all;
+    flex-shrink: 0;
+}
+.peek-bird {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    left: 50%;
+    bottom: -36px;
+    transform: translateX(-50%);
+    object-fit: contain;
+    transition: bottom 0.48s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.peek-hole:hover .peek-bird,
+.peek-hole.is-peeking .peek-bird { bottom: 4px; }
+
+/* about セクション専用の巣＋ひょっこり位置調整 */
+.about-nest.peek-hole {
+    width: 120px;
+    height: 120px;
+    border-radius: 999px;
+    background: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    position: relative;
+    pointer-events: auto;
+    right: -560px;
+}
+@media (min-width: 768px) {
+    .about-nest.peek-hole { right: -700px; }
+}
+.about-nest.peek-hole::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    pointer-events: auto;
+}
+.about-nest-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+}
+.about-nest .peek-bird {
+    width: 66px;
+    height: 66px;
+    bottom: 6px;
+    opacity: 0;
+    pointer-events: none;
+    transition: bottom 0.48s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.1s ease-out;
+}
+.about-nest:hover .peek-bird,
+.about-nest.is-peeking .peek-bird {
+    bottom: 28px;
+    opacity: 1;
+    transition: bottom 0.48s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out;
 }
