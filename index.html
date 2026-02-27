@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            if (window.location.hostname.indexOf('github.io') === -1) return;
+            var path = window.location.pathname;
+            var segs = path.split('/').filter(Boolean);
+            var basePath = segs.length > 0 ? '/' + segs[0] + '/' : '/';
+            var base = document.createElement('base');
+            base.href = window.location.origin + basePath;
+            document.head.insertBefore(base, document.head.firstChild);
+        })();
+    </script>
     <title>negura - 鳥の支配人が待つ、静かな隠れ家。</title>
     
     <link rel="icon" type="image/png" href="assets/images/b28216d9c2f682e8d0b6783003150f4a.png">
@@ -470,10 +481,10 @@
         (function () {
             var images = [
                 { src: 'assets/images/rectangle_large_type_2_1aa3de3079240d9b2a11c064285858c3.jpeg', alt: 'negura gallery 0' },
-                { src: 'assets/images/LINE_ALBUM_ねぐら_260228_1.jpg', alt: 'negura gallery 1' },
-                { src: 'assets/images/LINE_ALBUM_ねぐら_260228_3.jpg', alt: 'negura gallery 2' },
-                { src: 'assets/images/LINE_ALBUM_ねぐら_260228_4.jpg', alt: 'negura gallery 3' },
-                { src: 'assets/images/LINE_ALBUM_ねぐら_260228_5.jpg', alt: 'negura gallery 4' },
+                { src: 'assets/images/line_album_negura_260228_1.jpg', alt: 'negura gallery 1' },
+                { src: 'assets/images/line_album_negura_260228_3.jpg', alt: 'negura gallery 2' },
+                { src: 'assets/images/line_album_negura_260228_4.jpg', alt: 'negura gallery 3' },
+                { src: 'assets/images/line_album_negura_260228_5.jpg', alt: 'negura gallery 4' },
                 { src: 'assets/images/59526855bd99308567e7a22d6841de87.png', alt: 'negura gallery 5' }
             ];
             var current = 0;

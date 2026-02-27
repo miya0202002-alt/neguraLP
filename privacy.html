@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            if (window.location.hostname.indexOf('github.io') === -1) return;
+            var path = window.location.pathname;
+            var segs = path.split('/').filter(Boolean);
+            var basePath = segs.length > 0 ? '/' + segs[0] + '/' : '/';
+            var base = document.createElement('base');
+            base.href = window.location.origin + basePath;
+            document.head.insertBefore(base, document.head.firstChild);
+        })();
+    </script>
     <title>プライバシーポリシー | negura</title>
     <link rel="icon" type="image/png" href="assets/images/b28216d9c2f682e8d0b6783003150f4a.png">
     <script src="https://cdn.tailwindcss.com"></script>
