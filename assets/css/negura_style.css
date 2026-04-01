@@ -134,6 +134,22 @@ header {
     transform: scale(1.08);
     transform-origin: left center;
 }
+/* スマホ：絶対配置ロゴとナビが被らないように、ナビ側にロゴ分の余白を確保 */
+@media (max-width: 639px) {
+    .header-logo-link {
+        left: 1.5rem; /* index.html の px-6 と揃える */
+    }
+    .header-logo-img {
+        height: 36px;
+        min-height: 36px;
+        min-width: 120px;
+        transform: none;
+    }
+    header > .max-w-6xl {
+        padding-left: calc(1.5rem + 132px); /* ロゴ幅 + 余白 */
+        padding-right: 1.5rem;
+    }
+}
 @media (min-width: 768px) {
     .header-logo-img {
         height: 52px;
