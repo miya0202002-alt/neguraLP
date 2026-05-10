@@ -130,31 +130,23 @@
 
                 <!-- メインカルーセル -->
                 <div id="gallery-carousel" class="max-w-4xl mx-auto">
-                    <div class="flex items-center justify-center gap-3 md:gap-6">
-                        <button id="gallery-prev" type="button" class="h-10 w-10 md:h-12 md:w-12 rounded-full border border-[#322B29]/30 text-[#322B29]/70 hover:text-[#322B29] hover:border-[#322B29]/60 flex items-center justify-center text-lg disabled:opacity-30 disabled:hover:border-[#322B29]/30 disabled:hover:text-[#322B29]/70 transition-colors">
-                            ‹
-                        </button>
-                        <div class="flex-1">
-                            <div id="gallery-track" class="grid grid-cols-12 items-center gap-2 md:gap-4">
-                                <!-- 左（前の写真） -->
-                                <button id="gallery-thumb-prev" type="button" class="col-span-3 md:col-span-3 aspect-[4/3] rounded-lg overflow-hidden bg-[#FDF9F1] border border-[#322B29]/10 flex items-center justify-center opacity-60 hover:opacity-90 transition-opacity disabled:opacity-0 disabled:pointer-events-none">
-                                    <img id="gallery-left-img" src="" alt="" class="h-full w-full object-contain" loading="lazy">
-                                </button>
-                                <!-- 中央（現在の写真） -->
-                                <div class="col-span-6 md:col-span-6">
-                                    <div class="aspect-[4/3] rounded-xl overflow-hidden bg-[#FDF9F1] border border-[#322B29]/20 flex items-center justify-center">
-                                        <img id="gallery-main-img" src="assets/images/rectangle_large_type_2_1aa3de3079240d9b2a11c064285858c3.jpeg" alt="negura gallery 0" class="h-full w-full object-contain">
-                                    </div>
+                    <div class="w-full">
+                        <div id="gallery-track" class="grid grid-cols-12 items-center gap-2 md:gap-4">
+                            <!-- 左（前の写真） -->
+                            <button id="gallery-thumb-prev" type="button" class="col-span-3 md:col-span-3 aspect-[4/3] rounded-lg overflow-hidden bg-[#FDF9F1] flex items-center justify-center opacity-60 hover:opacity-90 transition-opacity disabled:opacity-0 disabled:pointer-events-none">
+                                <img id="gallery-left-img" src="" alt="" class="h-full w-full object-contain" loading="lazy">
+                            </button>
+                            <!-- 中央（現在の写真） -->
+                            <div class="col-span-6 md:col-span-6">
+                                <div class="aspect-[4/3] rounded-xl overflow-hidden bg-[#FDF9F1] flex items-center justify-center">
+                                    <img id="gallery-main-img" src="assets/images/rectangle_large_type_2_1aa3de3079240d9b2a11c064285858c3.jpeg" alt="negura gallery 0" class="h-full w-full object-contain">
                                 </div>
-                                <!-- 右（次の写真） -->
-                                <button id="gallery-thumb-next" type="button" class="col-span-3 md:col-span-3 aspect-[4/3] rounded-lg overflow-hidden bg-[#FDF9F1] border border-[#322B29]/10 flex items-center justify-center opacity-60 hover:opacity-90 transition-opacity disabled:opacity-0 disabled:pointer-events-none">
-                                    <img id="gallery-right-img" src="" alt="" class="h-full w-full object-contain" loading="lazy">
-                                </button>
                             </div>
+                            <!-- 右（次の写真） -->
+                            <button id="gallery-thumb-next" type="button" class="col-span-3 md:col-span-3 aspect-[4/3] rounded-lg overflow-hidden bg-[#FDF9F1] flex items-center justify-center opacity-60 hover:opacity-90 transition-opacity disabled:opacity-0 disabled:pointer-events-none">
+                                <img id="gallery-right-img" src="" alt="" class="h-full w-full object-contain" loading="lazy">
+                            </button>
                         </div>
-                        <button id="gallery-next" type="button" class="h-10 w-10 md:h-12 md:w-12 rounded-full border border-[#322B29]/30 text-[#322B29]/70 hover:text-[#322B29] hover:border-[#322B29]/60 flex items-center justify-center text-lg disabled:opacity-30 disabled:hover:border-[#322B29]/30 disabled:hover:text-[#322B29]/70 transition-colors">
-                            ›
-                        </button>
                     </div>
 
                     <div class="mt-6 text-center">
@@ -432,7 +424,7 @@
             <div class="max-w-6xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12">
                 <h2 class="text-2xl md:text-3xl font-medium text-[#322B29] tracking-[0.2em] md:tracking-[0.3em] uppercase mb-12 md:mb-16 reveal-on-scroll">カレンダー</h2>
                 <div id="calendar-container" class="w-full max-w-4xl mx-auto border border-[#322B29]/20 rounded-lg overflow-hidden bg-[#FDF9F1]">
-                    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&showPrint=0&showTitle=0&showNav=1&showTz=0&showCalendars=0&showTabs=0&showDate=0&src=dG93YTkyODZAZ21haWwuY29t&src=ZW4uamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&src=amEuamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23B31412&color=%230b8043&color=%230b8043" style="border-width:0; background:#FDF9F1;" width="100%" height="600" frameborder="0" scrolling="no" title="カレンダー"></iframe>
+                    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&showPrint=0&showTitle=0&showNav=1&showTz=0&showCalendars=0&showTabs=0&showDate=0&src=dG93YTkyODZAZ21haWwuY29t&color=%23B31412" style="border-width:0; background:#FDF9F1;" width="100%" height="600" frameborder="0" scrolling="no" title="カレンダー"></iframe>
                 </div>
             </div>
         </section>
@@ -512,23 +504,31 @@
         (function () {
             var images = [
                 { src: 'assets/images/rectangle_large_type_2_1aa3de3079240d9b2a11c064285858c3.jpeg', alt: 'negura gallery 0' },
-                { src: 'assets/images/1769775909-gsWS1rIGxmozHjNtKBuUeFi9.webp', alt: 'negura gallery 1' },
-                { src: 'assets/images/1769514092-72QcgXwAhZlieCjsW5mbENDr.webp', alt: 'negura gallery 2' },
-                { src: 'assets/images/1769775526-kMBQm8bgp9iITlDh2UOF5YRr.webp', alt: 'negura gallery 3' }
+                { src: 'assets/images/3147dd47-e419-4f31-bcec-1a064e4c7cba.avif', alt: 'negura gallery 1' },
+                { src: 'assets/images/9715a20c-cf6f-4eb5-90aa-bf773e7cdbbd.avif', alt: 'negura gallery 2' },
+                { src: 'assets/images/36404a13-87d1-41a9-bfdf-f43a4ca66271.avif', alt: 'negura gallery 3' },
+                { src: 'assets/images/30156eb2-fff0-41fe-952f-c5fb46146775.avif', alt: 'negura gallery 3' },
+                { src: 'assets/images/45e1af47-0ca7-4b29-b890-d65fd4530c34.avif', alt: 'negura gallery 3' },
+                { src: 'assets/images/2adcda3b-3722-4e4a-a12f-a9a4fcfa0e73.avif', alt: 'negura gallery 3' },
+                { src: 'assets/images/c4db6a7a-2a77-484a-9b98-18e6bf2bf98e.avif', alt: 'negura gallery 3' },
+                { src: 'assets/images/422f59f0-de5e-46a7-b5bf-589328584c78.avif', alt: 'negura gallery 3' },
+                { src: 'assets/images/da66c1db-476f-4acd-b17f-48e4987f7d33.avif', alt: 'negura gallery 3' },
+                { src: 'assets/images/50bfcc6c-e044-4aa0-8380-109932f0ecdf.avif', alt: 'negura gallery 3' },
+                { src: 'assets/images/7fb94add-794c-4937-9515-e4fa0f70744c.avif', alt: 'negura gallery 3' },
+                { src: 'assets/images/121fe7b2-6f8e-491a-b704-12beea493384.avif', alt: 'negura gallery 3' },
+                { src: 'assets/images/f6de0510-f107-4283-b5d2-29524bfe2fb3.jpg', alt: 'negura gallery 3' },
+
             ];
             var current = 0;
 
             var mainImg = document.getElementById('gallery-main-img');
             var leftImg = document.getElementById('gallery-left-img');
             var rightImg = document.getElementById('gallery-right-img');
-            var track = document.getElementById('gallery-track');
-            var prevBtn = document.getElementById('gallery-prev');
-            var nextBtn = document.getElementById('gallery-next');
             var thumbPrevBtn = document.getElementById('gallery-thumb-prev');
             var thumbNextBtn = document.getElementById('gallery-thumb-next');
             var openGridBtn = document.getElementById('gallery-open-grid');
 
-            if (!mainImg || !prevBtn || !nextBtn) return;
+            if (!mainImg || !leftImg || !rightImg || !thumbPrevBtn || !thumbNextBtn) return;
 
             var modal = null;
 
@@ -553,7 +553,7 @@
                 images.forEach(function (img, idx) {
                     var btn = document.createElement('button');
                     btn.type = 'button';
-                    btn.className = 'aspect-[4/3] w-full rounded-lg overflow-hidden border border-[#322B29]/15 bg-[#FDF9F1] hover:border-[#322B29]/40 transition-colors';
+                    btn.className = 'aspect-[4/3] w-full rounded-lg overflow-hidden bg-[#FDF9F1] transition-colors';
                     btn.innerHTML = '<img src="' + img.src + '" alt="' + img.alt + '" class="h-full w-full object-contain">';
                     btn.addEventListener('click', function () {
                         current = idx;
@@ -614,9 +614,6 @@
                     thumbNextBtn.disabled = true;
                 }
 
-                prevBtn.disabled = !hasPrev;
-                nextBtn.disabled = !hasNext;
-
                 if (direction === 'next' || direction === 'prev') {
                     // 既存のアニメーションを一旦リセット
                     if (track) {
@@ -631,20 +628,6 @@
                     }
                 }
             }
-
-            prevBtn.addEventListener('click', function () {
-                if (current > 0) {
-                    current -= 1;
-                    update('prev');
-                }
-            });
-
-            nextBtn.addEventListener('click', function () {
-                if (current < images.length - 1) {
-                    current += 1;
-                    update('next');
-                }
-            });
 
             thumbPrevBtn.addEventListener('click', function () {
                 if (current > 0) {

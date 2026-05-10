@@ -130,31 +130,23 @@
 
                 <!-- Main carousel (same structure as Japanese) -->
                 <div id="gallery-carousel" class="max-w-4xl mx-auto">
-                    <div class="flex items-center justify-center gap-3 md:gap-6">
-                        <button id="gallery-prev" type="button" class="h-10 w-10 md:h-12 md:w-12 rounded-full border border-[#322B29]/30 text-[#322B29]/70 hover:text-[#322B29] hover:border-[#322B29]/60 flex items-center justify-center text-lg disabled:opacity-30 disabled:hover:border-[#322B29]/30 disabled:hover:text-[#322B29]/70 transition-colors">
-                            ‹
-                        </button>
-                        <div class="flex-1">
-                            <div id="gallery-track" class="grid grid-cols-12 items-center gap-2 md:gap-4">
-                                <!-- Left (previous) -->
-                                <button id="gallery-thumb-prev" type="button" class="col-span-3 md:col-span-3 aspect-[4/3] rounded-lg overflow-hidden bg-[#FDF9F1] border border-[#322B29]/10 flex items-center justify-center opacity-60 hover:opacity-90 transition-opacity disabled:opacity-0 disabled:pointer-events-none">
-                                    <img id="gallery-left-img" src="" alt="" class="h-full w-full object-contain" loading="lazy">
-                                </button>
-                                <!-- Center (current) -->
-                                <div class="col-span-6 md:col-span-6">
-                                    <div class="aspect-[4/3] rounded-xl overflow-hidden bg-[#FDF9F1] border border-[#322B29]/20 flex items-center justify-center">
-                                        <img id="gallery-main-img" src="assets/images/rectangle_large_type_2_1aa3de3079240d9b2a11c064285858c3.jpeg" alt="negura gallery 0" class="h-full w-full object-contain">
-                                    </div>
+                    <div class="w-full">
+                        <div id="gallery-track" class="grid grid-cols-12 items-center gap-2 md:gap-4">
+                            <!-- Left (previous) -->
+                            <button id="gallery-thumb-prev" type="button" class="col-span-3 md:col-span-3 aspect-[4/3] rounded-lg overflow-hidden bg-[#FDF9F1] flex items-center justify-center opacity-60 hover:opacity-90 transition-opacity disabled:opacity-0 disabled:pointer-events-none">
+                                <img id="gallery-left-img" src="" alt="" class="h-full w-full object-contain" loading="lazy">
+                            </button>
+                            <!-- Center (current) -->
+                            <div class="col-span-6 md:col-span-6">
+                                <div class="aspect-[4/3] rounded-xl overflow-hidden bg-[#FDF9F1] flex items-center justify-center">
+                                    <img id="gallery-main-img" src="assets/images/rectangle_large_type_2_1aa3de3079240d9b2a11c064285858c3.jpeg" alt="negura gallery 0" class="h-full w-full object-contain">
                                 </div>
-                                <!-- Right (next) -->
-                                <button id="gallery-thumb-next" type="button" class="col-span-3 md:col-span-3 aspect-[4/3] rounded-lg overflow-hidden bg-[#FDF9F1] border border-[#322B29]/10 flex items-center justify-center opacity-60 hover:opacity-90 transition-opacity disabled:opacity-0 disabled:pointer-events-none">
-                                    <img id="gallery-right-img" src="" alt="" class="h-full w-full object-contain" loading="lazy">
-                                </button>
                             </div>
+                            <!-- Right (next) -->
+                            <button id="gallery-thumb-next" type="button" class="col-span-3 md:col-span-3 aspect-[4/3] rounded-lg overflow-hidden bg-[#FDF9F1] flex items-center justify-center opacity-60 hover:opacity-90 transition-opacity disabled:opacity-0 disabled:pointer-events-none">
+                                <img id="gallery-right-img" src="" alt="" class="h-full w-full object-contain" loading="lazy">
+                            </button>
                         </div>
-                        <button id="gallery-next" type="button" class="h-10 w-10 md:h-12 md:w-12 rounded-full border border-[#322B29]/30 text-[#322B29]/70 hover:text-[#322B29] hover:border-[#322B29]/60 flex items-center justify-center text-lg disabled:opacity-30 disabled:hover;border-[#322B29]/30 disabled:hover:text-[#322B29]/70 transition-colors">
-                            ›
-                        </button>
                     </div>
 
                     <div class="mt-6 text-center">
@@ -527,13 +519,11 @@
             var leftImg = document.getElementById('gallery-left-img');
             var rightImg = document.getElementById('gallery-right-img');
             var track = document.getElementById('gallery-track');
-            var prevBtn = document.getElementById('gallery-prev');
-            var nextBtn = document.getElementById('gallery-next');
             var thumbPrevBtn = document.getElementById('gallery-thumb-prev');
             var thumbNextBtn = document.getElementById('gallery-thumb-next');
             var openGridBtn = document.getElementById('gallery-open-grid');
 
-            if (!mainImg || !prevBtn || !nextBtn) return;
+            if (!mainImg || !leftImg || !rightImg || !thumbPrevBtn || !thumbNextBtn) return;
 
             var modal = null;
 
@@ -558,7 +548,7 @@
                 images.forEach(function (img, idx) {
                     var btn = document.createElement('button');
                     btn.type = 'button';
-                    btn.className = 'aspect-[4/3] w-full rounded-lg overflow-hidden border border-[#322B29]/15 bg-[#FDF9F1] hover:border-[#322B29]/40 transition-colors';
+                    btn.className = 'aspect-[4/3] w-full rounded-lg overflow-hidden bg-[#FDF9F1] transition-colors';
                     btn.innerHTML = '<img src="' + img.src + '" alt="' + img.alt + '" class="h-full w-full object-contain">';
                     btn.addEventListener('click', function () {
                         current = idx;
@@ -619,9 +609,6 @@
                     thumbNextBtn.disabled = true;
                 }
 
-                prevBtn.disabled = !hasPrev;
-                nextBtn.disabled = !hasNext;
-
                 if (direction === 'next' || direction === 'prev') {
                     if (track) {
                         track.classList.remove('gallery-track-anim-next', 'gallery-track-anim-prev');
@@ -634,20 +621,6 @@
                     }
                 }
             }
-
-            prevBtn.addEventListener('click', function () {
-                if (current > 0) {
-                    current -= 1;
-                    update('prev');
-                }
-            });
-
-            nextBtn.addEventListener('click', function () {
-                if (current < images.length - 1) {
-                    current += 1;
-                    update('next');
-                }
-            });
 
             thumbPrevBtn.addEventListener('click', function () {
                 if (current > 0) {
