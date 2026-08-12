@@ -508,11 +508,11 @@
         // Gallery (same behavior as Japanese version)
         (function () {
             var images = [
-                { src: 'assets/images/rectangle_large_type_2_1aa3de3079240d9b2a11c064285858c3.jpeg', alt: 'negura gallery 0' },
-                { src: 'assets/images/1769775909-gsWS1rIGxmozHjNtKBuUeFi9.webp', alt: 'negura gallery 1' },
-                { src: 'assets/images/1769514092-72QcgXwAhZlieCjsW5mbENDr.webp', alt: 'negura gallery 2' },
-                { src: 'assets/images/1769775526-kMBQm8bgp9iITlDh2UOF5YRr.webp', alt: 'negura gallery 3' }
-            ];
+      { src: 'assets/images/rectangle_large_type_2_1aa3de3079240d9b2a11c064285858c3.jpeg', alt: 'negura gallery 0' },
+      { src: 'assets/images/1769775909-gsWS1rIGxmozHjNtKBuUeFi9.webp', alt: 'negura gallery 1' },
+      { src: 'assets/images/1769514092-72QcgXwAhZlieCjsW5mbENDr.webp', alt: 'negura gallery 2' },
+      { src: 'assets/images/1769775526-kMBQm8bgp9iITlDh2UOF5YRr.webp', alt: 'negura gallery 3' }
+  ];
             var current = 0;
 
             var mainImg = document.getElementById('gallery-main-img');
@@ -691,12 +691,45 @@
                 }
 
                 function formatNewsContent(text) {
-                    if (!text) return '';
-                    var s = String(text);
-                    if (/<a\s/i.test(s)) return s;
-                    s = s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-                    return s.replace(/(https?:\/\/[^\s<>"']+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-[#92905D] underline hover:opacity-80">$1</a>');
-                }
+          if (!text) return '';
+          var s = String(text);
+
+          if (/<a\s/i.test(s)) {
+              var source = document.createElement('div');
+              var output = document.createElement('div');
+              source.innerHTML = s;
+
+              Array.from(source.childNodes).forEach(function (node) {
+                  if (node.nodeType === Node.TEXT_NODE) {
+                      output.appendChild(document.createTextNode(node.textContent || ''));
+                      return;
+                  }
+
+                  if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'A') {
+                      var href = node.getAttribute('href') || '';
+                      if (/^https?:\/\//i.test(href)) {
+                          var safeLink = document.createElement('a');
+                          safeLink.href = href;
+                          safeLink.target = '_blank';
+                          safeLink.rel = 'noopener noreferrer';
+                          safeLink.className = 'text-[#92905D] underline hover:opacity-80';
+                          safeLink.textContent = node.textContent || href;
+                          output.appendChild(safeLink);
+                      } else {
+                          output.appendChild(document.createTextNode(node.textContent || ''));
+                      }
+                      return;
+                  }
+
+                  output.appendChild(document.createTextNode(node.textContent || ''));
+              });
+
+              return output.innerHTML;
+          }
+
+          s = s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#39;');
+          return s.replace(/(https?:\/\/[^\s<>\"']+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-[#92905D] underline hover:opacity-80">$1</a>');
+      }
 
                 function render() {
                     var displayItems = isAllShown ? newsList : newsList.slice(0, 5);
